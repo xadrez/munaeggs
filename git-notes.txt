@@ -3,3 +3,6 @@ path to directory
 /documents/myGitStuff Humbs$ git init
 Initialized empty Git repository in /Users/Humbs/Documents/myGitStuff/.git/
 ls -la .git : gives all hidden files and dirs.
+git add .
+git commit -m "msg"
+make, add, commit changes
