@@ -24,22 +24,32 @@ var init = function () {
 	var marker = new google.maps.Marker({position:position,map:map,title:'Not draggable'});
 	
 	/*
-	*Add event to map. Marker
+	*Add click event to map. resulting in Marker
 	*/
 	
 			  google.maps.event.addListener(map, 'click', function(event) {
+			   /*
+			   *latLng contains the maker's coodinate 
+			   */
 			    placeMarker(event.latLng);
-//		        console.log(event.latLng);
-			    var key = 'AIzaSyBoOhXb6Gcmi26DMuhYrw9IM9tEFmZwOKk';
-			    var url = "https://maps.googleapis.com/maps/api/geocode/json?latlng="+event.latLng.k+","+event.latLng.D+"&key="+key+"";
-			    $.getJSON(url, function (data) {
-//			    console.log(url);
-			    	$('.widget-body').append('<p>'+data.results[0].formatted_address+'&nbsp;&nbsp;<a href="#">Remove</a></p>');
-			    
-			    });
-			   // console.log(markers);
-
-			  });
+		        
+					    $('.widget-body').empty();
+					    
+			var num = 0;
+		 $.each(markers,function (key, val) {
+			//Use the google geocoding services to get a formated address
+				var key = 'AIzaSyBoOhXb6Gcmi26DMuhYrw9IM9tEFmZwOKk';
+				var url ="https://maps.googleapis.com/maps/api/geocode/json?latlng="+val.position.k+","+val.position.D+"&key="+key+"";
+					    	
+//				console.log(url);
+				$.getJSON(url, function (data) {
+				num++;
+				//Append formated address to the widget div.
+					   $('.widget-body').append('<p>'+num+'. '+data.results[0].formatted_address+'&nbsp;&nbsp;<button id="btn">Remove</button></p>');
+					    
+					    });
+			});
+					   
 			
 			function placeMarker(location) {
 			  var marker = new google.maps.Marker({
