@@ -88,6 +88,12 @@ div{
 	background-color: #fbf8f3;
 	
 }
+.addr{
+	padding-top: 3px;
+	margin-bottom: 3px;
+	height:40px;
+	border-bottom: 1px dotted #999;
+}
 .btn-widget{
 
 	margin-left: 3px;

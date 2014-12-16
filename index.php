@@ -24,7 +24,7 @@
 					<div class="widget-title"><h3>Route</h3></div>
 					<div class="widget-body"></div>
 					<div class="widget-error"></div>
-					<p><a class="btn btn-default btn-widget" href="#">Save</a></p>
+					<p><a id="save_list" class="btn btn-default btn-widget">Save</a></p>
 				</div><!--end of widget-->
 			</div><!--aside-->
 		</div><!--row-->

@@ -27,15 +27,15 @@ var init = function () {
 	*Add click event to map. resulting in Marker
 	*/
 	
-			  google.maps.event.addListener(map, 'click', function(event) {
-			   /*
-			   *latLng contains the maker's coodinate 
-			   */
-			    placeMarker(event.latLng);
+		google.maps.event.addListener(map, 'click', function(event) {
+	 /*
+	*latLng contains the maker's coodinate 
+    */
+		placeMarker(event.latLng);
 		        
-					    $('.widget-body').empty();
+		$('.widget-body').empty();
 					    
-			var num = 0;
+		var num = 0;
 		 $.each(markers,function (key, val) {
 			//Use the google geocoding services to get a formated address
 				var key = 'AIzaSyBoOhXb6Gcmi26DMuhYrw9IM9tEFmZwOKk';
@@ -45,12 +45,15 @@ var init = function () {
 				$.getJSON(url, function (data) {
 				num++;
 				//Append formated address to the widget div.
-					   $('.widget-body').append('<p>'+num+'. '+data.results[0].formatted_address+'&nbsp;&nbsp;<button id="btn">Remove</button></p>');
+					   $('.widget-body').append('<p class="addr">'+num+'. '+data.results[0].formatted_address+'&nbsp;&nbsp;<button id="btn">Remove</button></p>');
 					    
 					    });
 			});
-					   
-			
+});					   
+/*
+*Place marker on the map and add it to the array that contain all markers
+*Takes one argument coordinate
+*/			
 			function placeMarker(location) {
 			  var marker = new google.maps.Marker({
 			      position: location,
@@ -61,9 +64,26 @@ var init = function () {
 			  	markers.push(marker);
 			  }
 			 
-			  	  google.maps.event.addListener(marker, 'dragend', function(event) {
+			 google.maps.event.addListener(marker, 'dragend', function(event) {
 			  	alert('Drag endded');
 			  });//end of marker listener draend
+			  
+			  /*
+			  *Save the current list of address
+			  */
+			  			$('#save_list').on('click',function (e) {
+			  				if (markers.length != 0) {
+			  					saveList(e);
+			  				}else{
+			  				console.log('Nothing to save');
+			  				}
+			  				
+			  			});
+			  		  function saveList(event) {
+			  		  	event.preventDefault();
+			  		  	console.log('Saving in progress...');
+			  		  }
+			  
 			  
 	
 }
